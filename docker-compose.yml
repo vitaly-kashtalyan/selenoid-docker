@@ -1,31 +1,17 @@
 version: '3'
 services:
   selenoid:
-    image: aerokube/selenoid:1.10.8
+    image: aerokube/selenoid:1.10.9
     restart: always
     volumes:
       - "$PWD/selenoid:/etc/selenoid"
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "$PWD/selenoid/video:/opt/selenoid/video"
       - "$PWD/selenoid/logs:/opt/selenoid/logs"
-    environment:
-      - OVERRIDE_VIDEO_OUTPUT_DIR=$PWD/selenoid/video
-    command: [ "-conf", "/etc/selenoid/browsers.json", "-video-output-dir", "/opt/selenoid/video", "-log-output-dir", "/opt/selenoid/logs", "-video-recorder-image", "selenoid/video-recorder:7.1", "-limit", "4" ]
+    command: [ "-conf", "/etc/selenoid/browsers.json", "-log-output-dir", "/opt/selenoid/logs", "-limit", "2" ]
     network_mode: bridge
     ports:
       - "4444:4444"
     depends_on:
-      - selenoid-video-recorder
-      - selenoid-chrome
-  selenoid-ui:
-    image: aerokube/selenoid-ui:1.10.8
-    network_mode: bridge
-    links:
-      - selenoid
-    ports:
-      - "8888:8080"
-    command: [ "--selenoid-uri", "http://selenoid:4444" ]
-  selenoid-video-recorder:
-    image: selenoid/video-recorder:7.1
-  selenoid-chrome:
-    image: selenoid/vnc_chrome:108.0
+      - selenoid-chrome-arm
+  selenoid-chrome-arm:
+    image: sskorol/selenoid_chromium_vnc:100.0

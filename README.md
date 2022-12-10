@@ -1,8 +1,10 @@
-# selenoid-docker
+# Selenoid docker
+## Prepared especially for ARM architecture
 
-## Quick Start Guide
 
-### Start [Selenoid](https://github.com/aerokube/selenoid) using [docker-compose](https://docs.docker.com/compose/)
+### Quick Start Guide
+
+Start [Selenoid](https://github.com/aerokube/selenoid) using [docker-compose](https://docs.docker.com/compose/)
 
 ```docker
 docker-compose up --build -d
@@ -13,7 +15,7 @@ docker-compose up --build -d
 ```java
 
 ChromeOptions options=new ChromeOptions();
-    options.setCapability("browserVersion","108.0");
+    options.setCapability("browserVersion","100.0");
     options.setCapability("selenoid:options",new HashMap<String, Object>(){{
     /* How to set session timeout */
     put("sessionTimeout","5m");
