@@ -1,0 +1,21 @@
+{
+  "chrome": {
+    "default": "108.0",
+    "versions": {
+      "108.0": {
+        "image": "selenoid/vnc:chrome_108.0",
+        "port": "4444",
+        "tmpfs": {
+          "/tmp": "size=512m"
+        },
+        "env": [
+          "TZ=UTC",
+          "LANG=en_US.UTF-8",
+          "LANGUAGE=en:en",
+          "LC_ALL=en_US.UTF-8"
+        ],
+        "shmSize": 268435456
+      }
+    }
+  }
+}
